@@ -1,11 +1,9 @@
 package com.njuse.jvmfinal.util;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 public class IOUtil {
+
     public static byte[] readFileByBytes(InputStream is) throws IOException {
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
             BufferedInputStream in;
@@ -22,4 +20,22 @@ public class IOUtil {
             throw e;
         }
     }
+
+    public static String transform(String classPathOrClassName) {
+        if (classPathOrClassName.contains("/")) {
+            classPathOrClassName = classPathOrClassName.replace("/", "/");
+        }
+        if (classPathOrClassName.contains("\\")) {
+            classPathOrClassName = classPathOrClassName.replace("\\", "/");
+        }
+        return classPathOrClassName;
+    }
+
+    public static String dotToSeparator(String className) {
+        if (className.contains(".")) {
+            className = className.replace(".", "/");
+        }
+        return className;
+    }
+
 }

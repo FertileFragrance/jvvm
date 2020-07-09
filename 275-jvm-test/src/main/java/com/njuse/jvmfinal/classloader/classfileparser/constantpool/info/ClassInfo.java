@@ -2,9 +2,6 @@ package com.njuse.jvmfinal.classloader.classfileparser.constantpool.info;
 
 import com.njuse.jvmfinal.classloader.classfileparser.constantpool.ConstantPool;
 
-/**
- * todo
- */
 public class ClassInfo extends ConstantPoolInfo {
     private int nameIndex;
 
@@ -14,7 +11,9 @@ public class ClassInfo extends ConstantPoolInfo {
         super.tag = ConstantPoolInfo.CLASS;
     }
 
-
+    /*
+        获取字符串类型的ClassName
+     */
     public String getClassName() {
         return ((UTF8Info) myCP.get(nameIndex)).getString();
 

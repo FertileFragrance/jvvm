@@ -18,9 +18,9 @@ import static com.njuse.jvmfinal.classloader.classfileparser.constantpool.info.C
 
 @Setter
 @Getter
-public class RuntimeConstantPool {
-    private JClass clazz;
-    private Constant[] constants;
+public class RuntimeConstantPool {      // 一个JClass对应的运行时常量池，一个类对应一个运行时常量池
+    private JClass clazz;               // 运行时常量池所在的类
+    private Constant[] constants;       // 运行时常量池包含的常量信息，其中的字段和方法是引用，未解析
 
     public RuntimeConstantPool(ConstantPool constantPool, JClass clazz) {
         this.clazz = clazz;
@@ -93,6 +93,9 @@ public class RuntimeConstantPool {
 
     }
 
+    /*
+        根据索引获得常量池的某个常量
+     */
     public Constant getConstant(int index) {
         assert index >= 1;
         return constants[index - 1];

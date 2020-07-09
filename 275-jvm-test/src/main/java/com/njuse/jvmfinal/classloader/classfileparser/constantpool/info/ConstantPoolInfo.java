@@ -6,7 +6,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.nio.ByteBuffer;
 
-public class ConstantPoolInfo {
+public abstract class ConstantPoolInfo {                         // 常量池的项目类型对象，该包下的其他类均为此类的子类，改为抽象类
     public static final byte CLASS = 7;
     public static final byte FIELD_REF = 9;
     public static final byte METHOD_REF = 10;
@@ -22,7 +22,7 @@ public class ConstantPoolInfo {
     public static final byte METHOD_TYPE = 16;
     public static final byte INVOKE_DYNAMIC = 18;
     protected byte tag;
-    protected ConstantPool myCP;
+    protected ConstantPool myCP;                                // 该项目类型所在的常量池引用
 
     public ConstantPoolInfo(ConstantPool myCP) {
         this.myCP = myCP;

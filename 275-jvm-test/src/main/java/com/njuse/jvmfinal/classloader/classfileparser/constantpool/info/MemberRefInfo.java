@@ -12,6 +12,9 @@ public abstract class MemberRefInfo extends ConstantPoolInfo {
 
     public abstract String getClassName();
 
+    /*
+        通过idx获取常量池中的第idx项，再强转为ClassInfo类型，由ClassInfo类型获取到的ClassName即为字符串
+     */
     protected String getClassName(int idx) {
         return ((ClassInfo) myCP.get(idx)).getClassName();
     }
