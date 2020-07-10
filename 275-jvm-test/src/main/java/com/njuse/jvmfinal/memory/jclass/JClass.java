@@ -5,6 +5,7 @@ import com.njuse.jvmfinal.classloader.classfileparser.FieldInfo;
 import com.njuse.jvmfinal.classloader.classfileparser.MethodInfo;
 import com.njuse.jvmfinal.classloader.classfileparser.constantpool.ConstantPool;
 import com.njuse.jvmfinal.classloader.classfilereader.classpath.EntryType;
+import com.njuse.jvmfinal.datastruct.NonArrayObject;
 import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.RuntimeConstantPool;
 import com.njuse.jvmfinal.memory.methodArea.StaticVars;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
@@ -173,6 +174,14 @@ public class JClass {                                   // 一个JClass对象就
             initClass(threadStack, jClass.getSuperClass());
         }
         jClass.setInitState(InitState.SUCCESS);
+    }
+
+    /**
+     * 创建一个非数组的对象
+     * @return 创建好的对象
+     */
+    public NonArrayObject newObject() {
+        return new NonArrayObject(this);
     }
 
 }

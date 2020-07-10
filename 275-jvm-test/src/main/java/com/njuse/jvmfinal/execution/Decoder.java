@@ -11,6 +11,7 @@ import com.njuse.jvmfinal.instructions.convert.fromLong.*;
 import com.njuse.jvmfinal.instructions.invoke.*;
 import com.njuse.jvmfinal.instructions.load.constValue.*;
 import com.njuse.jvmfinal.instructions.load.fromLocalVariableTable.*;
+import com.njuse.jvmfinal.instructions.object.NEW;
 import com.njuse.jvmfinal.instructions.object.accessField.GETFIELD;
 import com.njuse.jvmfinal.instructions.object.accessField.GETSTATIC;
 import com.njuse.jvmfinal.instructions.object.accessField.PUTFIELD;
@@ -227,6 +228,8 @@ public class Decoder {
         opMap.put(InstructionSet.INVOKESPECIAL, new INVOKESPECIAL());
         opMap.put(InstructionSet.INVOKESTATIC, new INVOKESTATIC());
         opMap.put(InstructionSet.INVOKEINTERFACE, new INVOKEINTERFACE());
+        //opMap.put(InstructionSet.INVOKEDYNAMIC, new INVOKEDYNAMIC());
+        opMap.put(InstructionSet.NEW, new NEW());
 
         opMap.put(InstructionSet.IFNULL, new IFNULL());
         opMap.put(InstructionSet.IFNONNULL, new IFNONNULL());

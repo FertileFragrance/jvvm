@@ -11,8 +11,9 @@ import com.njuse.jvmfinal.util.IOUtil;
 public class Starter {
     public static void main(String[] args) {
         ClassLoader classLoader = ClassLoader.getInstance();
-        JClass jClass = classLoader.loadClass("cases/light/LightEasyStaticTest", "src/test/java", null);
+        //JClass jClass = classLoader.loadClass("cases/light/LightEasyStaticTest", "src/test/java", null);
         //JClass jClass = classLoader.loadClass("java/lang/Object", "", null);
+        JClass jClass = classLoader.loadClass("cases/medium/MediumTest", "src/test/java", null);
         ThreadStack threadStack = new ThreadStack();
         Method mainMethod = jClass.getMainMethod();
         if (mainMethod == null) {

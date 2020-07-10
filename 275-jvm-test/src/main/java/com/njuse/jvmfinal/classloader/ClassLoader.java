@@ -285,6 +285,9 @@ public class ClassLoader {
     private void calInstanceFieldSlotIDs(JClass jClass) {
         Field[] fields = jClass.getFields();
         int slotID = 0;
+        if (jClass.getSuperClass() != null) {
+            slotID = jClass.getSuperClass().getInstanceSlotCount();
+        }
         for (int i = 0; i < fields.length; i++) {
             if (!fields[i].isStatic()) {
                 fields[i].setSlotID(slotID);

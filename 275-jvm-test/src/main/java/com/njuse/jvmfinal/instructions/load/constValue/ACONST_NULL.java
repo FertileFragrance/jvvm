@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.load.constValue;
 
+import com.njuse.jvmfinal.datastruct.NullObject;
 import com.njuse.jvmfinal.instructions.abstractIns.NoOperandsInstruction;
 import com.njuse.jvmfinal.memory.threadStack.OperandStack;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
@@ -13,7 +14,7 @@ public class ACONST_NULL extends NoOperandsInstruction {
     @Override
     public void execute(StackFrame topStackFrame) {
         OperandStack operandStack = topStackFrame.getOperandStack();
-        operandStack.pushObject(null);// TODO 有待修改
+        operandStack.pushObject(new NullObject());
     }
 
 }

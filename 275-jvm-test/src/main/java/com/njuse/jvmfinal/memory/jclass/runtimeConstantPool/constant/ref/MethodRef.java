@@ -57,7 +57,7 @@ public class MethodRef extends MemberRef {
             }
         }
         if (jClass.getSuperClass() != null) {
-            resolveMethodRef(jClass.getSuperClass());
+            return resolveMethodRef(jClass.getSuperClass());
         }
         return null;
     }

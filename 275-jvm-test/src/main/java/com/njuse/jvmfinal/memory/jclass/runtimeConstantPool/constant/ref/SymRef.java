@@ -17,15 +17,16 @@ public abstract class SymRef implements Constant {      // 所有的引用都是
      * 此方法用于解析类或接口，并将解析结果赋值给成员变量clazz，执行指令时会调用
      * caller是当前代码所处的类，callee是从未解析过（也是没有加载过）的要去解析的类
      */
-    public void resolveClassRef() {
+    public JClass resolveClassRef() {
         if (classToResolve != null) {
-            return;
+            return classToResolve;
         }
         JClass caller = runtimeConstantPool.getClazz();
         JClass callee = ClassLoader.getInstance().loadClass(className, null, caller.getLoadEntryType());
         if (callee.isAccessibleTo(caller)) {
             classToResolve = callee;
         }
+        return classToResolve;
     }
 
 }

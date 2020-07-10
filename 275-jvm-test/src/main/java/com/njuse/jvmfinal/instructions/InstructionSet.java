@@ -197,7 +197,7 @@ public class InstructionSet {
     public static final int INVOKESTATIC = 184;
     public static final int INVOKEINTERFACE = 185;
     public static final int INVOKEDYNAMIC = 186;
-    public static final int NEW_ = 187;
+    public static final int NEW = 187;
     public static final int NEWARRAY = 188;
     public static final int ANEWARRAY = 189;
     public static final int ARRAYLENGTH = 190;

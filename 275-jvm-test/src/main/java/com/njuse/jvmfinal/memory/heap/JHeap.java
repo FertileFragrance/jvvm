@@ -1,4 +1,4 @@
-package com.njuse.jvmfinal.memory;
+package com.njuse.jvmfinal.memory.heap;
 
 import com.njuse.jvmfinal.datastruct.JObject;
 

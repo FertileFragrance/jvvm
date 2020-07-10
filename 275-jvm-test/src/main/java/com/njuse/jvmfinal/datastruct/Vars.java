@@ -1,7 +1,7 @@
 package com.njuse.jvmfinal.datastruct;
 
 /**
- * 此抽象类为局部变量表和静态变量提供统一的槽位
+ * 此抽象类为局部变量表、静态变量和实例变量提供统一的槽位
  */
 public abstract class Vars {
 
