@@ -1,10 +1,10 @@
 package com.njuse.jvmfinal.instructions.load.constValue;
 
-import com.njuse.jvmfinal.instructions.abstractIns.Index8Instruction;
+import com.njuse.jvmfinal.instructions.abstractIns.NoOperandsInstruction;
 import com.njuse.jvmfinal.memory.threadStack.OperandStack;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
 
-public class FCONST_N extends Index8Instruction {
+public class FCONST_N extends NoOperandsInstruction {
 
     private float value;    /**要被push的float类型数值*/
 

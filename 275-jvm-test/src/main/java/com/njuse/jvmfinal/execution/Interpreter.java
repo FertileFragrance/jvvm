@@ -63,6 +63,7 @@ public class Interpreter {
             instruction.fetchOperands(codeReader);
             int nextPC = codeReader.position();
             topStackFrame.setNextPC(nextPC);
+            //System.out.println(instruction);
             instruction.execute(topStackFrame);
             StackFrame newTopStackFrame = threadStack.getTopStackFrame();
             if (newTopStackFrame == null) {

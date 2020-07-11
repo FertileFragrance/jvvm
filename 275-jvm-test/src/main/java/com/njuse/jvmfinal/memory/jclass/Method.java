@@ -120,6 +120,7 @@ public class Method extends ClassMember {
             Instruction instruction = Decoder.decode(opcode);
             instruction.fetchOperands(codeReader);
             this.instList.add(position + " " + instruction.toString());
+            //System.out.println(position + " " + instruction + " " + this.clazz.getName());
         }
         hasParsed = true;
     }
