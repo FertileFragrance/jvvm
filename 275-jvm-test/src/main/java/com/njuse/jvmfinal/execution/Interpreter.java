@@ -5,6 +5,7 @@ import com.njuse.jvmfinal.memory.jclass.Method;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
 import com.njuse.jvmfinal.memory.threadStack.ThreadStack;
 
+import java.io.*;
 import java.nio.ByteBuffer;
 
 /**
@@ -26,7 +27,14 @@ public class Interpreter {
      */
     public static void interpret(ThreadStack threadStack) {
         initCodeReader(threadStack);
-        loop(threadStack);
+        File file = new File("./src/log.txt");
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new FileWriter(file));
+        } catch (IOException e) {
+            //e.printStackTrace();
+        }
+        loop(threadStack, bw);
     }
 
     /**
@@ -50,7 +58,7 @@ public class Interpreter {
      * 6. 一次循环结束，下一次开始重新获得顶层栈帧继续执行
      * @param threadStack 正在执行的线程栈
      */
-    private static void loop(ThreadStack threadStack) {
+    private static void loop(ThreadStack threadStack, BufferedWriter bw) {
         while (true) {
             StackFrame topStackFrame = threadStack.getTopStackFrame();
             Method method = topStackFrame.getMethod();
@@ -63,10 +71,28 @@ public class Interpreter {
             instruction.fetchOperands(codeReader);
             int nextPC = codeReader.position();
             topStackFrame.setNextPC(nextPC);
-            //System.out.println(instruction);
+            //System.out.printf("%-30s", instruction);
+            //System.out.println(threadStack.getTopStackFrame().getMethod().getClazz().getName());
+            try {
+                bw.write(String.valueOf(instruction));
+                for (int i = 0; i < 30 - String.valueOf(instruction).length(); i++) {
+                    bw.write(' ');
+                }
+                bw.write(threadStack.getTopStackFrame().getMethod().getClazz().getName() + "\n");
+                bw.flush();
+            } catch (IOException e) {
+                //e.printStackTrace();
+            }
             instruction.execute(topStackFrame);
             StackFrame newTopStackFrame = threadStack.getTopStackFrame();
             if (newTopStackFrame == null) {
+                try {
+                    bw.write("##############################################################");
+                    bw.flush();
+                    bw.close();
+                } catch (IOException e) {
+                    //e.printStackTrace();
+                }
                 return;
             }
             if (newTopStackFrame != topStackFrame) {
