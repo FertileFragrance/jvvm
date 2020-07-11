@@ -26,4 +26,5 @@ public class GOTO_W extends BranchInstruction {
         int branchPC = topStackFrame.getNextPC() - 3 + this.offset;
         topStackFrame.setNextPC(branchPC);
     }
+
 }

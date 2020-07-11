@@ -27,10 +27,12 @@ public class Interpreter {
      */
     public static void interpret(ThreadStack threadStack) {
         initCodeReader(threadStack);
-        File file = new File("./src/log.txt");
+        File file = new File("./src/main/java/com/njuse/jvmfinal/classloader/ClassLoader.java");
         BufferedWriter bw = null;
         try {
-            bw = new BufferedWriter(new FileWriter(file));
+            bw = new BufferedWriter(new FileWriter(file, true));
+            bw.write("############################The start!###############################\n");
+            bw.flush();
         } catch (IOException e) {
             //e.printStackTrace();
         }
@@ -87,7 +89,7 @@ public class Interpreter {
             StackFrame newTopStackFrame = threadStack.getTopStackFrame();
             if (newTopStackFrame == null) {
                 try {
-                    bw.write("##############################################################");
+                    bw.write("############################The end!#################################\n\n");
                     bw.flush();
                     bw.close();
                 } catch (IOException e) {
