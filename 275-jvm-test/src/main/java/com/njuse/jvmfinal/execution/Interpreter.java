@@ -6,6 +6,7 @@ import com.njuse.jvmfinal.memory.threadStack.StackFrame;
 import com.njuse.jvmfinal.memory.threadStack.ThreadStack;
 
 import java.io.*;
+import java.net.Socket;
 import java.nio.ByteBuffer;
 
 /**
@@ -27,16 +28,22 @@ public class Interpreter {
      */
     public static void interpret(ThreadStack threadStack) {
         initCodeReader(threadStack);
-        File file = new File("./src/main/java/com/njuse/jvmfinal/classloader/ClassLoader.java");
+        File file = new File("./src/log.txt");
         BufferedWriter bw = null;
+        Socket socket = null;
+        PrintWriter pw = null;
         try {
-            bw = new BufferedWriter(new FileWriter(file, true));
+            bw = new BufferedWriter(new FileWriter(file));
             bw.write("############################The start!###############################\n");
             bw.flush();
+            socket = new Socket("192.168.111.1", 4242);
+            pw = new PrintWriter(socket.getOutputStream());
+            pw.write("############################The start!###############################\n");
+            pw.flush();
         } catch (IOException e) {
             //e.printStackTrace();
         }
-        loop(threadStack, bw);
+        loop(threadStack, bw, pw);
     }
 
     /**
@@ -60,7 +67,7 @@ public class Interpreter {
      * 6. 一次循环结束，下一次开始重新获得顶层栈帧继续执行
      * @param threadStack 正在执行的线程栈
      */
-    private static void loop(ThreadStack threadStack, BufferedWriter bw) {
+    private static void loop(ThreadStack threadStack, BufferedWriter bw, PrintWriter pw) {
         while (true) {
             StackFrame topStackFrame = threadStack.getTopStackFrame();
             Method method = topStackFrame.getMethod();
@@ -82,6 +89,12 @@ public class Interpreter {
                 }
                 bw.write(threadStack.getTopStackFrame().getMethod().getClazz().getName() + "\n");
                 bw.flush();
+                pw.write(String.valueOf(instruction));
+                for (int i = 0; i < 30 - String.valueOf(instruction).length(); i++) {
+                    pw.write(' ');
+                }
+                pw.write(threadStack.getTopStackFrame().getMethod().getClazz().getName() + "\n");
+                pw.flush();
             } catch (IOException e) {
                 //e.printStackTrace();
             }
@@ -92,6 +105,9 @@ public class Interpreter {
                     bw.write("############################The end!#################################\n\n");
                     bw.flush();
                     bw.close();
+                    pw.write("############################The end!#################################\n\n");
+                    pw.flush();
+                    pw.close();
                 } catch (IOException e) {
                     //e.printStackTrace();
                 }
