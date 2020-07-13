@@ -139,7 +139,7 @@ public class Decoder {
         opMap.put(InstructionSet.DUP2_X2, new DUP2_X2());
         opMap.put(InstructionSet.SWAP, new SWAP());
         opMap.put(InstructionSet.IADD, new IADD());
-        opMap.put(InstructionSet.LADD, new FADD());
+        opMap.put(InstructionSet.LADD, new LADD());
         opMap.put(InstructionSet.FADD, new FADD());
         opMap.put(InstructionSet.DADD, new DADD());
         opMap.put(InstructionSet.ISUB, new ISUB());
