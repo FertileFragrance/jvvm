@@ -20,7 +20,18 @@ public class LCONST_N extends NoOperandsInstruction {
     @Override
     public void execute(StackFrame topStackFrame) {
         OperandStack operandStack = topStackFrame.getOperandStack();
-        operandStack.pushLong(value);
+        //operandStack.pushLong(value);
+        try {
+            operandStack.pushLong(value);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            String message = "当前执行的方法是" + topStackFrame.getMethod().getName() + "\n";
+            message += "当前方法操作数栈最大容量是" + topStackFrame.getMethod().getMaxStack() + "\n";
+            message += "当前执行的方法所在的类是" + topStackFrame.getMethod().getClazz().getName() + "\n";
+            message += "操作数栈信息" + topStackFrame.getOperandStack().toString() + "\n\n\n";
+            message += Interpreter.message;
+            throw new ArrayIndexOutOfBoundsException(message);
+        }
+
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
                 topStackFrame.getMethod().getName() + "\n";
     }

@@ -3,6 +3,8 @@ package com.njuse.jvmfinal.memory.threadStack;
 import com.njuse.jvmfinal.datastruct.JObject;
 import com.njuse.jvmfinal.datastruct.Slot;
 
+import java.util.Arrays;
+
 /**
  * 此类表示操作数栈对象，被栈帧组合
  */
@@ -92,6 +94,15 @@ public class OperandStack {
         Slot ret = slots[top];
         slots[top] = new Slot();
         return ret;
+    }
+
+    @Override
+    public String toString() {
+        return "OperandStack{" +
+                "maxSize=" + maxSize +
+                ", slots=" + Arrays.toString(slots) +
+                ", top=" + top +
+                '}';
     }
 
 }
