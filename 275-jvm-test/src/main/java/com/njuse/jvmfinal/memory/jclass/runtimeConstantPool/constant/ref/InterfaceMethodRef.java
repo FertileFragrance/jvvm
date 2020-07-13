@@ -30,15 +30,18 @@ public class InterfaceMethodRef extends MemberRef {
     }
 
     private Method resolveInterfaceMethodRefInSuperClass(JClass jClass, String name, String descriptor) {
+        if (jClass == null || jClass.getName().equals("")) {
+            return null;
+        }
         for (Method m : jClass.getMethods()) {
             if (m.getName().equals(name) && m.getDescriptor().equals(descriptor)) {
                 return m;
             }
         }
-        if (jClass.getSuperClass() != null) {
-            return resolveInterfaceMethodRefInSuperClass(jClass.getSuperClass(), name, descriptor);
+        if (resolveInterfaceMethodRefInInterfaces(jClass, name, descriptor) != null) {
+            return resolveInterfaceMethodRefInInterfaces(jClass, name, descriptor);
         }
-        return resolveInterfaceMethodRefInInterfaces(jClass, name, descriptor);
+        return resolveInterfaceMethodRefInSuperClass(jClass.getSuperClass(), name, descriptor);
     }
 
     private Method resolveInterfaceMethodRefInInterfaces(JClass jClass, String name, String descriptor) {
@@ -64,10 +67,10 @@ public class InterfaceMethodRef extends MemberRef {
                 return m;
             }
         }
-        if (jClass.getSuperClass() != null) {
-            return resolveInterfaceMethodRef(jClass.getSuperClass());
+        if (resolveInterfaceMethodRefInInterfaces(jClass, name, descriptor) != null) {
+            return resolveInterfaceMethodRefInInterfaces(jClass, name, descriptor);
         }
-        return resolveInterfaceMethodRefInInterfaces(jClass, name, descriptor);
+        return resolveInterfaceMethodRefInSuperClass(jClass.getSuperClass(), name, descriptor);
     }
 
 }
