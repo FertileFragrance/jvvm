@@ -15,9 +15,14 @@ public class RETURN extends NoOperandsInstruction {
     public void execute(StackFrame topStackFrame) {
         ThreadStack threadStack = topStackFrame.getThreadStack();
         threadStack.popStackFrame();
-        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\t" + "返回的方法所在的类是"  + threadStack.getTopStackFrame()
-                .getMethod().getClazz().getName() + "\t" + "返回的方法是" + threadStack.getTopStackFrame().getMethod() + "\n";
+        if (!(threadStack.getTopStackFrame() == null)) {
+            Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                    topStackFrame.getMethod().getName() + "\t" + "返回的方法所在的类是"  + threadStack.getTopStackFrame()
+                    .getMethod().getClazz().getName() + "\t" + "返回的方法是" + threadStack.getTopStackFrame().getMethod().getName() + "\n";
+        } else {
+            Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                    topStackFrame.getMethod().getName() + "\n";
+        }
     }
 
 }
