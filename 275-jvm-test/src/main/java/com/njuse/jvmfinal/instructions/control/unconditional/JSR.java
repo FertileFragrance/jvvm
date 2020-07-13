@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.control.unconditional;
 
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.BranchInstruction;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
 
@@ -14,6 +15,8 @@ public class JSR extends BranchInstruction {
         // TODO 将此指令的下一条指令的地址push到操作数栈中
         int branchPC = topStackFrame.getNextPC() - 3 + this.offset;
         topStackFrame.setNextPC(branchPC);
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\n";
     }
 
 }

@@ -2,6 +2,7 @@ package com.njuse.jvmfinal.instructions.invoke;
 
 import com.njuse.jvmfinal.datastruct.JObject;
 import com.njuse.jvmfinal.datastruct.Slot;
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.Index16Instruction;
 import com.njuse.jvmfinal.memory.jclass.Method;
 import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.constant.Constant;
@@ -52,6 +53,9 @@ public class INVOKEINTERFACE extends Index16Instruction {
         Method toInvoke = ((InterfaceMethodRef) interfaceMethodRef).resolveInterfaceMethodRef(objectRef.getClazz());
         StackFrame newFrame = prepareNewFrame(topStackFrame, argc, argv, objectRef, toInvoke);
         topStackFrame.getThreadStack().pushStackFrame(newFrame);
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\t" + "真正调用的接口方法所在的类是"  + toInvoke.getClazz().getName() +
+                "\t" + "真正调用的接口方法是" + toInvoke.getName() + "\n";
     }
 
     private StackFrame prepareNewFrame(

@@ -2,6 +2,7 @@ package com.njuse.jvmfinal.instructions.invoke;
 
 import com.njuse.jvmfinal.datastruct.JObject;
 import com.njuse.jvmfinal.datastruct.Slot;
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.Index16Instruction;
 import com.njuse.jvmfinal.memory.jclass.JClass;
 import com.njuse.jvmfinal.memory.jclass.Method;
@@ -50,11 +51,15 @@ public class INVOKESPECIAL extends Index16Instruction {
             String message = "当前执行的方法是" + topStackFrame.getMethod().getName() + "\n";
             message += ("当前执行的方法所在的类是" + topStackFrame.getMethod().getClazz().getName() + "\n");
             message += ("由方法引用解析得到的方法是" + method.getName() + "\n");
-            message += ("由方法引用解析得到的方法所在的类是" + method.getClazz().getName() + "\n");
+            message += ("由方法引用解析得到的方法所在的类是" + method.getClazz().getName() + "\n\n\n");
+            message += Interpreter.message;
             throw new NullPointerException(message);
         }
         StackFrame newFrame = prepareNewFrame(topStackFrame, argc, argv, objectRef, toInvoke);
         topStackFrame.getThreadStack().pushStackFrame(newFrame);
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\t" + "真正调用的特殊方法所在的类是"  + toInvoke.getClazz().getName() +
+                "\t" + "真正调用的特殊方法是" + toInvoke.getName() + "\n";
     }
 
     private StackFrame prepareNewFrame(

@@ -1,6 +1,7 @@
 package com.njuse.jvmfinal.instructions.opndstack;
 
 import com.njuse.jvmfinal.datastruct.Slot;
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.NoOperandsInstruction;
 import com.njuse.jvmfinal.memory.threadStack.OperandStack;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
@@ -21,6 +22,8 @@ public class DUP_X2 extends NoOperandsInstruction {
         operandStack.pushSlot(val3.clone());
         operandStack.pushSlot(val2.clone());
         operandStack.pushSlot(val1.clone());
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\n";
     }
 
 }

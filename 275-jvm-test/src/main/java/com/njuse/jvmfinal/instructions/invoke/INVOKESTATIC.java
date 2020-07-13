@@ -1,6 +1,7 @@
 package com.njuse.jvmfinal.instructions.invoke;
 
 import com.njuse.jvmfinal.datastruct.Slot;
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.Index16Instruction;
 import com.njuse.jvmfinal.memory.jclass.InitState;
 import com.njuse.jvmfinal.memory.jclass.Method;
@@ -71,6 +72,9 @@ public class INVOKESTATIC extends Index16Instruction {
         }
         StackFrame newFrame = prepareNewFrame(topStackFrame, argc, argv, method);
         topStackFrame.getThreadStack().pushStackFrame(newFrame);
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\t" + "调用的静态方法所在的类是"  + method.getClazz().getName() +
+                "\t" + "调用的静态方法是" + method.getName() + "\n";
     }
 
     private StackFrame prepareNewFrame(StackFrame stackFrame, int argc, Slot[] argv, Method method) {

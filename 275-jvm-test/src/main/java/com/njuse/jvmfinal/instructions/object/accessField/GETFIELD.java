@@ -1,6 +1,7 @@
 package com.njuse.jvmfinal.instructions.object.accessField;
 
 import com.njuse.jvmfinal.datastruct.NonArrayObject;
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.Index16Instruction;
 import com.njuse.jvmfinal.memory.heap.InstanceVars;
 import com.njuse.jvmfinal.memory.jclass.Field;
@@ -57,6 +58,9 @@ public class GETFIELD extends Index16Instruction {
             default:
                 break;
         }
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\t" + "字段所在的类是" + field.getClazz().getName() + "\t" +
+                "字段是" + field.getName() + "\n";
     }
 
 }

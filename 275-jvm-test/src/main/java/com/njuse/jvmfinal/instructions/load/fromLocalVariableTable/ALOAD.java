@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.load.fromLocalVariableTable;
 
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.Index8Instruction;
 import com.njuse.jvmfinal.memory.threadStack.LocalVariableTable;
 import com.njuse.jvmfinal.memory.threadStack.OperandStack;
@@ -16,6 +17,8 @@ public class ALOAD extends Index8Instruction {
         OperandStack operandStack = topStackFrame.getOperandStack();
         LocalVariableTable localVariableTable = topStackFrame.getLocalVariableTable();
         operandStack.pushObject(localVariableTable.getObject(index));
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\n";
     }
 
 }

@@ -15,6 +15,7 @@ import java.nio.ByteBuffer;
 public class Interpreter {
 
     private static ByteBuffer codeReader;   /**用于读取指令*/
+    public static String message = "";
 
     /**
      * 构造方法私有，不允许创建该类的实例

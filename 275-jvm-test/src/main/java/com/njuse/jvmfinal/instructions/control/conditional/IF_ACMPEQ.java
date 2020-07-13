@@ -1,6 +1,7 @@
 package com.njuse.jvmfinal.instructions.control.conditional;
 
 import com.njuse.jvmfinal.datastruct.JObject;
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.BranchInstruction;
 import com.njuse.jvmfinal.memory.threadStack.OperandStack;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
@@ -20,6 +21,8 @@ public class IF_ACMPEQ extends BranchInstruction {
             int branchPC = topStackFrame.getNextPC() - 3 + this.offset;
             topStackFrame.setNextPC(branchPC);
         }
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\n";
     }
 
 }

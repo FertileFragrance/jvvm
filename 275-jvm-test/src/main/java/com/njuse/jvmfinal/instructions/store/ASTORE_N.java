@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.store;
 
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.memory.threadStack.LocalVariableTable;
 import com.njuse.jvmfinal.memory.threadStack.OperandStack;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
@@ -19,6 +20,8 @@ public class ASTORE_N extends STORE_N {
         OperandStack operandStack = topStackFrame.getOperandStack();
         LocalVariableTable localVariableTable = topStackFrame.getLocalVariableTable();
         localVariableTable.setObject(index, operandStack.popObject());
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\n";
     }
 
 }

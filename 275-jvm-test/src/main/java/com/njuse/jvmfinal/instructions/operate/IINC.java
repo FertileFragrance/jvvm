@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.operate;
 
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.Index8Instruction;
 import com.njuse.jvmfinal.memory.threadStack.LocalVariableTable;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
@@ -24,6 +25,8 @@ public class IINC extends Index8Instruction {
     public void execute(StackFrame topStackFrame) {
         LocalVariableTable localVariableTable = topStackFrame.getLocalVariableTable();
         localVariableTable.setInt(index, constValue + localVariableTable.getInt(index));
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\n";
     }
 
 }

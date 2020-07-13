@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.control.unconditional;
 
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.Index8Instruction;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
 
@@ -12,6 +13,8 @@ public class RET extends Index8Instruction {
     @Override
     public void execute(StackFrame topStackFrame) {
         // TODO
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\n";
     }
 
 }

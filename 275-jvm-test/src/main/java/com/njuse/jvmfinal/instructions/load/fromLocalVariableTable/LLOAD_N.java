@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.load.fromLocalVariableTable;
 
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.memory.threadStack.LocalVariableTable;
 import com.njuse.jvmfinal.memory.threadStack.OperandStack;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
@@ -19,6 +20,8 @@ public class LLOAD_N extends LOAD_N {
         OperandStack operandStack = topStackFrame.getOperandStack();
         LocalVariableTable localVariableTable = topStackFrame.getLocalVariableTable();
         operandStack.pushLong(localVariableTable.getLong(index));
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\n";
     }
 
 }

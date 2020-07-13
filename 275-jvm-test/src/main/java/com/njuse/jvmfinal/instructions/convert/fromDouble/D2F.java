@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.convert.fromDouble;
 
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.NoOperandsInstruction;
 import com.njuse.jvmfinal.memory.threadStack.OperandStack;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
@@ -15,6 +16,8 @@ public class D2F extends NoOperandsInstruction {
         OperandStack operandStack = topStackFrame.getOperandStack();
         double val = operandStack.popDouble();
         operandStack.pushFloat((float) val);
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName();
     }
 
 }

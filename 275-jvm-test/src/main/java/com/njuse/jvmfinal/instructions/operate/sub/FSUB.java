@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.operate.sub;
 
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.NoOperandsInstruction;
 import com.njuse.jvmfinal.memory.threadStack.OperandStack;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
@@ -17,6 +18,8 @@ public class FSUB extends NoOperandsInstruction {
         float val1 = operandStack.popFloat();
         float res = val1 -val2;
         operandStack.pushFloat(res);
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\n";
     }
 
 }

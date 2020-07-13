@@ -1,6 +1,7 @@
 package com.njuse.jvmfinal.instructions.object;
 
 import com.njuse.jvmfinal.datastruct.NonArrayObject;
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.Index16Instruction;
 import com.njuse.jvmfinal.memory.heap.JHeap;
 import com.njuse.jvmfinal.memory.jclass.InitState;
@@ -33,6 +34,8 @@ public class NEW extends Index16Instruction {
         NonArrayObject nonArrayObject = jClass.newObject();
         JHeap.getInstance().addObject(nonArrayObject);
         topStackFrame.getOperandStack().pushObject(nonArrayObject);
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\t" + "创建的对象实例所在的类是" + jClass.getName();
     }
 
 }

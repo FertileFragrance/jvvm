@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.operate.shift;
 
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.NoOperandsInstruction;
 import com.njuse.jvmfinal.memory.threadStack.OperandStack;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
@@ -17,6 +18,8 @@ public class LSHR extends NoOperandsInstruction {
         long val1 = operandStack.popInt();
         long res = val1 >> (val2 & 0x3f);
         operandStack.pushLong(res);
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\n";
     }
 
 }

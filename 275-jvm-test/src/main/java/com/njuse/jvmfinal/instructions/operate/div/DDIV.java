@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.operate.div;
 
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.NoOperandsInstruction;
 import com.njuse.jvmfinal.memory.threadStack.OperandStack;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
@@ -17,6 +18,8 @@ public class DDIV extends NoOperandsInstruction {
         double val1 = operandStack.popDouble();
         double res = val1 / val2;
         operandStack.pushDouble(res);
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\n";
     }
 
 }

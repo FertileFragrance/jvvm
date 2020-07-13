@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.load.constValue;
 
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.Index16Instruction;
 import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.constant.Constant;
 import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.constant.wrapper.*;
@@ -23,6 +24,8 @@ public class LDC2_W extends Index16Instruction {
         } else if (constant instanceof DoubleWrapper) {
             operandStack.pushDouble(((DoubleWrapper) constant).getValue());
         }
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\n";
     }
 
 }

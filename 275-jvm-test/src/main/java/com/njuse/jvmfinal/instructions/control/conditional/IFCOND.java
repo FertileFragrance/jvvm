@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.control.conditional;
 
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.BranchInstruction;
 import com.njuse.jvmfinal.memory.threadStack.OperandStack;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
@@ -17,6 +18,8 @@ public abstract class IFCOND extends BranchInstruction {
     public void execute(StackFrame topStackFrame) {
         OperandStack operandStack = topStackFrame.getOperandStack();
         int val = operandStack.popInt();
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\n";
         if (condition(val)) {
             int branchPC = topStackFrame.getNextPC() - 3 + this.offset;
             topStackFrame.setNextPC(branchPC);

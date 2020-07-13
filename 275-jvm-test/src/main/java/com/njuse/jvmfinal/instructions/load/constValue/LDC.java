@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.load.constValue;
 
+import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.Index8Instruction;
 import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.constant.Constant;
 import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.constant.ref.ClassRef;
@@ -32,6 +33,8 @@ public class LDC extends Index8Instruction {
         } else if (constant instanceof ClassRef) {
 
         }
+        Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
+                topStackFrame.getMethod().getName() + "\n";
     }
 
 }

@@ -13,7 +13,7 @@ public class Starter {
         ClassLoader classLoader = ClassLoader.getInstance();
         //JClass jClass = classLoader.loadClass("cases/light/LightEasyStaticTest", "src/test/java", null);
         //JClass jClass = classLoader.loadClass("java/lang/Object", "", null);
-        JClass jClass = classLoader.loadClass("cases/medium/MediumTest", "src/test/java", null);
+        JClass jClass = classLoader.loadClass("cases/light/LightEasyStaticTest", "src/test/java", null);
         ThreadStack threadStack = new ThreadStack();
         Method mainMethod = jClass.getMainMethod();
         if (mainMethod == null) {
@@ -24,6 +24,7 @@ public class Starter {
         threadStack.pushStackFrame(mainMethodStackFrame);
         jClass.initClass(threadStack, jClass);
         Interpreter.interpret(threadStack);
+        System.out.println(Interpreter.message);
     }
 
     /**
