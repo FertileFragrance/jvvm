@@ -46,6 +46,7 @@ public class INVOKESPECIAL extends Index16Instruction {
             C = method.getClazz();
         }
         Method toInvoke = ((MethodRef) methodRef).resolveMethodRef(C);
+        assert toInvoke != null;
         StackFrame newFrame = prepareNewFrame(topStackFrame, argc, argv, objectRef, toInvoke);
         topStackFrame.getThreadStack().pushStackFrame(newFrame);
     }
