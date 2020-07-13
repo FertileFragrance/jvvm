@@ -62,15 +62,7 @@ public class InterfaceMethodRef extends MemberRef {
      * @return 找到的接口方法
      */
     public Method resolveInterfaceMethodRef(JClass jClass) {
-        for (Method m : jClass.getMethods()) {
-            if(m.getName().equals(name) && m.getDescriptor().equals(descriptor)) {
-                return m;
-            }
-        }
-        if (resolveInterfaceMethodRefInInterfaces(jClass, name, descriptor) != null) {
-            return resolveInterfaceMethodRefInInterfaces(jClass, name, descriptor);
-        }
-        return resolveInterfaceMethodRefInSuperClass(jClass.getSuperClass(), name, descriptor);
+        return resolveInterfaceMethodRefInSuperClass(jClass, name, descriptor);
     }
 
 }

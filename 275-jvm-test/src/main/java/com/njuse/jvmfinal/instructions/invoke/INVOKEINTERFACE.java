@@ -51,6 +51,12 @@ public class INVOKEINTERFACE extends Index16Instruction {
         }
         JObject objectRef = topStackFrame.getOperandStack().popObject();
         Method toInvoke = ((InterfaceMethodRef) interfaceMethodRef).resolveInterfaceMethodRef(objectRef.getClazz());
+        if (toInvoke == null) {
+            String message = "要调用的接口方法名是" + method.getName() + "\n";
+            message += "引用objectRef的类是" + method.getClazz().getName() + "\n";
+            message += "objectRef真正的类是" + objectRef.getClazz().getName() + "\n";
+            throw new NullPointerException(message + Interpreter.message);
+        }
         StackFrame newFrame = prepareNewFrame(topStackFrame, argc, argv, objectRef, toInvoke);
         topStackFrame.getThreadStack().pushStackFrame(newFrame);
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
