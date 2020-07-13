@@ -46,7 +46,13 @@ public class INVOKESPECIAL extends Index16Instruction {
             C = method.getClazz();
         }
         Method toInvoke = ((MethodRef) methodRef).resolveMethodRef(C);
-        assert toInvoke != null;
+        if (toInvoke == null) {
+            String message = "当前执行的方法是" + topStackFrame.getMethod().getName() + "\n";
+            message += ("当前执行的方法所在的类是" + topStackFrame.getMethod().getClazz().getName() + "\n");
+            message += ("由方法引用解析得到的方法是" + method.getName() + "\n");
+            message += ("由方法引用解析得到的方法所在的类是" + method.getClazz().getName() + "\n");
+            throw new NullPointerException(message);
+        }
         StackFrame newFrame = prepareNewFrame(topStackFrame, argc, argv, objectRef, toInvoke);
         topStackFrame.getThreadStack().pushStackFrame(newFrame);
     }
