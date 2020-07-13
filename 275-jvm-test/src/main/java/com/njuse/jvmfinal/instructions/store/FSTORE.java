@@ -18,7 +18,7 @@ public class FSTORE extends Index8Instruction {
         LocalVariableTable localVariableTable = topStackFrame.getLocalVariableTable();
         localVariableTable.setFloat(index, operandStack.popFloat());
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

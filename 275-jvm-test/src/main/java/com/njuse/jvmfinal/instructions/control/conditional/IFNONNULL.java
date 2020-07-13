@@ -18,7 +18,7 @@ public class IFNONNULL extends BranchInstruction {
         OperandStack operandStack = topStackFrame.getOperandStack();
         JObject val = operandStack.popObject();
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
         if (!(val instanceof NullObject)) {
             int branchPC = topStackFrame.getNextPC() - 3 + this.offset;
             topStackFrame.setNextPC(branchPC);

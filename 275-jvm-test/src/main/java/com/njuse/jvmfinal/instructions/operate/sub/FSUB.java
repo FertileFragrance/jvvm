@@ -19,7 +19,7 @@ public class FSUB extends NoOperandsInstruction {
         float res = val1 -val2;
         operandStack.pushFloat(res);
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

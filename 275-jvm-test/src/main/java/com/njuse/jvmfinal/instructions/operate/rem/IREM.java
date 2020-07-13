@@ -20,7 +20,7 @@ public class IREM extends NoOperandsInstruction {
         int res = val1 % val2;
         operandStack.pushInt(res);
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

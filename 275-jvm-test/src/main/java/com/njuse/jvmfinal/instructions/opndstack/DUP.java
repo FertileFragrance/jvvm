@@ -19,7 +19,7 @@ public class DUP extends NoOperandsInstruction {
         operandStack.pushSlot(val.clone());
         operandStack.pushSlot(val.clone());
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

@@ -21,7 +21,7 @@ public class FLOAD_N extends LOAD_N {
         LocalVariableTable localVariableTable = topStackFrame.getLocalVariableTable();
         operandStack.pushFloat(localVariableTable.getFloat(index));
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

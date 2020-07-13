@@ -26,7 +26,7 @@ public class IINC extends Index8Instruction {
         LocalVariableTable localVariableTable = topStackFrame.getLocalVariableTable();
         localVariableTable.setInt(index, constValue + localVariableTable.getInt(index));
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + topStackFrame.getOperandStack().toString() +"\n";
     }
 
 }

@@ -32,7 +32,7 @@ public class DCMPL extends NoOperandsInstruction {
             operandStack.pushInt(-1);
         }
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

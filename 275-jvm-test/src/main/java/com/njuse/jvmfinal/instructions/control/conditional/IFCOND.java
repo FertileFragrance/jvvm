@@ -19,7 +19,7 @@ public abstract class IFCOND extends BranchInstruction {
         OperandStack operandStack = topStackFrame.getOperandStack();
         int val = operandStack.popInt();
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
         if (condition(val)) {
             int branchPC = topStackFrame.getNextPC() - 3 + this.offset;
             topStackFrame.setNextPC(branchPC);

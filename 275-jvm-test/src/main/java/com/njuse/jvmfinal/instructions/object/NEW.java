@@ -35,7 +35,8 @@ public class NEW extends Index16Instruction {
         JHeap.getInstance().addObject(nonArrayObject);
         topStackFrame.getOperandStack().pushObject(nonArrayObject);
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\t" + "创建的对象实例所在的类是" + jClass.getName() + "\n";
+                topStackFrame.getOperandStack() + "\t" + topStackFrame.getMethod().getName() + "\t" +
+                "创建的对象实例所在的类是" + jClass.getName() + "\n";
     }
 
 }

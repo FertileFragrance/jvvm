@@ -17,7 +17,7 @@ public class POP2 extends NoOperandsInstruction {
         operandStack.popSlot();
         operandStack.popSlot();
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

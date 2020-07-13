@@ -20,7 +20,7 @@ public abstract class IF_ICMPCOND extends BranchInstruction {
         int val2 = operandStack.popInt();
         int val1 = operandStack.popInt();
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
         if (condition(val1, val2)) {
             int branchPC = topStackFrame.getNextPC() - 3 + this.offset;
             topStackFrame.setNextPC(branchPC);

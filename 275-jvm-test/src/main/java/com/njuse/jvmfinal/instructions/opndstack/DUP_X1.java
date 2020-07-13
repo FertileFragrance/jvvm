@@ -21,7 +21,7 @@ public class DUP_X1 extends NoOperandsInstruction {
         operandStack.pushSlot(val2);
         operandStack.pushSlot(val1);
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

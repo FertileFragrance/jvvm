@@ -17,7 +17,7 @@ public class ACONST_NULL extends NoOperandsInstruction {
         OperandStack operandStack = topStackFrame.getOperandStack();
         operandStack.pushObject(new NullObject());
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

@@ -27,7 +27,7 @@ public class LCMP extends NoOperandsInstruction {
             operandStack.pushInt(-1);
         }
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName();
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

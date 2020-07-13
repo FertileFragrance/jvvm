@@ -17,7 +17,7 @@ public class FNEG extends NoOperandsInstruction {
         float val = operandStack.popFloat();
         operandStack.pushFloat(-val);
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

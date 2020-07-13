@@ -74,8 +74,8 @@ public class PUTFIELD extends Index16Instruction {
                 break;
         }
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\t" + "字段所在的类是" + field.getClazz().getName() + "\t" +
-                "字段是" + field.getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() + "\t" + "字段所在的类是" +
+                field.getClazz().getName() + "\t" + "字段是" + field.getName() + "\n";
     }
 
 }

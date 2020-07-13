@@ -21,4 +21,11 @@ public class Slot {
         return slot;
     }
 
+    @Override
+    public String toString() {
+        return "Slot{" +
+                "value=" + value +
+                '}';
+    }
+
 }

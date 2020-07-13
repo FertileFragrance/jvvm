@@ -25,7 +25,7 @@ public class LDC2_W extends Index16Instruction {
             operandStack.pushDouble(((DoubleWrapper) constant).getValue());
         }
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

@@ -22,7 +22,7 @@ public class DUP2 extends NoOperandsInstruction {
         operandStack.pushSlot(val2.clone());
         operandStack.pushSlot(val1.clone());
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

@@ -18,7 +18,7 @@ public class ILOAD extends Index8Instruction {
         LocalVariableTable localVariableTable = topStackFrame.getLocalVariableTable();
         operandStack.pushInt(localVariableTable.getInt(index));
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

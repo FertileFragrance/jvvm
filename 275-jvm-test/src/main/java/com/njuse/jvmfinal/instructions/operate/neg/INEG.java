@@ -17,7 +17,7 @@ public class INEG extends NoOperandsInstruction {
         int val = operandStack.popInt();
         operandStack.pushInt(-val);
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

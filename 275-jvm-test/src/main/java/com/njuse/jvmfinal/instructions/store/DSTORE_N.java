@@ -21,7 +21,7 @@ public class DSTORE_N extends STORE_N {
         LocalVariableTable localVariableTable = topStackFrame.getLocalVariableTable();
         localVariableTable.setDouble(index, operandStack.popDouble());
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

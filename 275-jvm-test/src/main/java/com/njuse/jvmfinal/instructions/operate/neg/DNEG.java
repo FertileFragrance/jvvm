@@ -17,7 +17,7 @@ public class DNEG extends NoOperandsInstruction {
         double val = operandStack.popDouble();
         operandStack.pushDouble(-val);
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
 }

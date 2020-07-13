@@ -25,7 +25,7 @@ public class BIPUSH extends Instruction {
         OperandStack operandStack = topStackFrame.getOperandStack();
         operandStack.pushInt(this.value);
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
 
     @Override
