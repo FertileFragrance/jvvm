@@ -41,6 +41,9 @@ public class INVOKEINTERFACE extends Index16Instruction {
                 get(topStackFrame.getMethod().getClazz()).getConstant(index);
         assert interfaceMethodRef instanceof InterfaceMethodRef;
         Method method = ((InterfaceMethodRef) interfaceMethodRef).resolveInterfaceMethodRef();
+        if (method == null) {
+            throw new NullPointerException(Interpreter.message);
+        }
         if (method.isNative()) {
             return;
         }

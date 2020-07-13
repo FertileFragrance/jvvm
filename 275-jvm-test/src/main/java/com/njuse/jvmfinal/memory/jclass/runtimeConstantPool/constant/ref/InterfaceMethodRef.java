@@ -38,6 +38,18 @@ public class InterfaceMethodRef extends MemberRef {
         if (jClass.getSuperClass() != null) {
             return resolveInterfaceMethodRefInSuperClass(jClass.getSuperClass(), name, descriptor);
         }
+        return resolveInterfaceMethodRefInInterfaces(jClass, name, descriptor);
+    }
+
+    private Method resolveInterfaceMethodRefInInterfaces(JClass jClass, String name, String descriptor) {
+        JClass[] interfaces = jClass.getInterfaces();
+        for (JClass clazz : interfaces) {
+            for (Method m : clazz.getMethods()) {
+                if (m.getName().equals(name) && m.getDescriptor().equals(descriptor)) {
+                    return m;
+                }
+            }
+        }
         return null;
     }
 
@@ -55,7 +67,7 @@ public class InterfaceMethodRef extends MemberRef {
         if (jClass.getSuperClass() != null) {
             return resolveInterfaceMethodRef(jClass.getSuperClass());
         }
-        return null;
+        return resolveInterfaceMethodRefInInterfaces(jClass, name, descriptor);
     }
 
 }
