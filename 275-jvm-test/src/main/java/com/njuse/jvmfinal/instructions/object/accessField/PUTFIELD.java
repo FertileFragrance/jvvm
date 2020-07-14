@@ -71,7 +71,9 @@ public class PUTFIELD extends Index16Instruction {
                 nonArrayObject.getInstanceVars().setInt(slotID, booleanVal);
                 break;
             default:
-                break;
+                String message = field.getName() + "\n";
+                message += field.getDescriptor() + "\n";
+                throw new RuntimeException(message);
         }
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
                 topStackFrame.getMethod().getName() + "\t" + operandStack.toString() + "\t" + "字段所在的类是" +
