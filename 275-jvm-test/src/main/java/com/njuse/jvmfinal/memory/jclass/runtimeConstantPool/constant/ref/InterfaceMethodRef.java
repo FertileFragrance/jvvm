@@ -41,6 +41,11 @@ public class InterfaceMethodRef extends MemberRef {
         if (resolveInterfaceMethodRefInInterfaces(jClass, name, descriptor) != null) {
             return resolveInterfaceMethodRefInInterfaces(jClass, name, descriptor);
         }
+        for (int i = 0; i < jClass.getInterfaces().length; i++) {
+            if (resolveInterfaceMethodRefInSuperClass(jClass.getInterfaces()[i], name, descriptor) != null) {
+                return resolveInterfaceMethodRefInSuperClass(jClass.getInterfaces()[i], name, descriptor);
+            }
+        }
         return resolveInterfaceMethodRefInSuperClass(jClass.getSuperClass(), name, descriptor);
     }
 
