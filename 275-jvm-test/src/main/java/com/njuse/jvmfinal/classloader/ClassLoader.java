@@ -3,14 +3,12 @@ package com.njuse.jvmfinal.classloader;
 import com.njuse.jvmfinal.classloader.classfileparser.ClassFile;
 import com.njuse.jvmfinal.classloader.classfilereader.ClassFileReader;
 import com.njuse.jvmfinal.classloader.classfilereader.classpath.EntryType;
+import com.njuse.jvmfinal.datastruct.NullObject;
 import com.njuse.jvmfinal.memory.jclass.Field;
 import com.njuse.jvmfinal.memory.jclass.InitState;
 import com.njuse.jvmfinal.memory.jclass.JClass;
 import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.RuntimeConstantPool;
-import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.constant.wrapper.DoubleWrapper;
-import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.constant.wrapper.FloatWrapper;
-import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.constant.wrapper.IntWrapper;
-import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.constant.wrapper.LongWrapper;
+import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.constant.wrapper.*;
 import com.njuse.jvmfinal.memory.methodArea.MethodArea;
 import com.njuse.jvmfinal.memory.methodArea.StaticVars;
 import org.apache.commons.lang3.tuple.Pair;
@@ -194,7 +192,7 @@ public class ClassLoader {
     }
 
     /**
-     * 给带有final修饰符的静态字段从运行时常量池中赋值，暂不考虑对象类型
+     * 给带有final修饰符的静态字段从运行时常量池中赋值
      * @param jClass 进行准备阶段的类
      * @param field 该类的其中一个静态字段
      */
@@ -241,7 +239,7 @@ public class ClassLoader {
     }
 
     /**
-     * 给不带有final修饰符的静态字段赋零值，暂不考虑对象类型
+     * 给不带有final修饰符的静态字段赋零值
      * @param jClass 进行准备阶段的类
      * @param field 该类的其中一个静态字段
      */
@@ -271,6 +269,9 @@ public class ClassLoader {
                     break;
                 case 'Z':
                     staticVars.setInt(field.getSlotID(), 0);
+                    break;
+                case 'L':
+                    staticVars.setObject(field.getSlotID(), new NullObject());
                     break;
                 default:
                     break;

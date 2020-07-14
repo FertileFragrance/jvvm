@@ -55,6 +55,9 @@ public class GETFIELD extends Index16Instruction {
             case 'Z':
                 operandStack.pushInt(instanceVars.getInt(slotID));
                 break;
+            case 'L':
+                operandStack.pushObject(instanceVars.getObject(slotID));
+                break;
             default:
                 break;
         }

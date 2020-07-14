@@ -1,5 +1,6 @@
 package com.njuse.jvmfinal.instructions.object.accessField;
 
+import com.njuse.jvmfinal.datastruct.JObject;
 import com.njuse.jvmfinal.datastruct.NonArrayObject;
 import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.Index16Instruction;
@@ -70,10 +71,13 @@ public class PUTFIELD extends Index16Instruction {
                 nonArrayObject = (NonArrayObject) operandStack.popObject();
                 nonArrayObject.getInstanceVars().setInt(slotID, booleanVal);
                 break;
+            case 'L':
+                JObject objectVal = operandStack.popObject();
+                nonArrayObject = (NonArrayObject) operandStack.popObject();
+                nonArrayObject.getInstanceVars().setObject(slotID, objectVal);
+                break;
             default:
-                String message = field.getName() + "\n";
-                message += field.getDescriptor() + "\n";
-                throw new RuntimeException(message);
+                break;
         }
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
                 topStackFrame.getMethod().getName() + "\t" + operandStack.toString() + "\t" + "字段所在的类是" +

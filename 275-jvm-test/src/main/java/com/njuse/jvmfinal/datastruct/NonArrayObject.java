@@ -51,8 +51,10 @@ public class NonArrayObject extends JObject {
                             case 'Z':
                                 this.instanceVars.setInt(f.getSlotID(), 0);
                                 break;
-                            default:
+                            case 'L':
                                 this.instanceVars.setObject(f.getSlotID(), new NullObject());
+                                break;
+                            default:
                                 break;
                         }
                     });
