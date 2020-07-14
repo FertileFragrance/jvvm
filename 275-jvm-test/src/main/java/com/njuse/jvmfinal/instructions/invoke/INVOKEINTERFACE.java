@@ -61,11 +61,24 @@ public class INVOKEINTERFACE extends Index16Instruction {
                 message += objectRef.getClazz().getInterfaces()[i].getName() + "\t";
             }
             message += "\n";
-            message += "Child类的父类是" + objectRef.getClazz().getSuperClass().getName();
+            message += "Human接口继承的接口数量是" + objectRef.getClazz().getInterfaces()[0].getInterfaces().length + "\n";
+            message += "它们是";
+            for (int i = 0; i < objectRef.getClazz().getInterfaces()[0].getInterfaces().length; i++) {
+                message += objectRef.getClazz().getInterfaces()[0].getInterfaces()[i].getName() + "\t";
+            }
+            message += "\n";
+            message += "Child类的父类是" + objectRef.getClazz().getSuperClass().getName() + "\n";
             message += "Child类的父类实现的接口数量是" + objectRef.getClazz().getSuperClass().getInterfaces().length + "\n";
             message += "它们是";
             for (int i = 0; i < objectRef.getClazz().getSuperClass().getInterfaces().length; i++) {
                 message += objectRef.getClazz().getSuperClass().getInterfaces()[i].getName() + "\t";
+            }
+            message += "\n";
+            message += "Parent类的父类是" + objectRef.getClazz().getSuperClass().getSuperClass() + "\n";
+            message += "Parent类的父类实现的接口数量是" + objectRef.getClazz().getSuperClass().getSuperClass().getInterfaces().length + "\n";
+            message += "它们是";
+            for (int i = 0; i < objectRef.getClazz().getSuperClass().getSuperClass().getInterfaces().length; i++) {
+                message += objectRef.getClazz().getSuperClass().getSuperClass().getInterfaces()[i].getName() + "\t";
             }
             message += "\n";
             throw new NullPointerException(message);
