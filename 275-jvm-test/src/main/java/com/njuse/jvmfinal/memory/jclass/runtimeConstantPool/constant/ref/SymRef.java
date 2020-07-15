@@ -10,7 +10,7 @@ import lombok.Getter;
 public abstract class SymRef implements Constant {      // 所有的引用都是从运行时常量池中得到的
 
     protected RuntimeConstantPool runtimeConstantPool;  // 该引用所在的运行时常量池，修饰符改为protected，下同
-    protected String className;                         // 引用所在类的类名，format : java/lang/Object
+    protected String className;                         // 引用所指的类的类名，format : java/lang/Object
     protected JClass classToResolve;                    // 引用所指的类，对于ClassRef来说就是解析完成的类，暂时没有赋值
 
     /**

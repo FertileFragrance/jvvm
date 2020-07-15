@@ -18,7 +18,7 @@ public class ARRAYLENGTH extends NoOperandsInstruction {
         ArrayObject arrayObject = (ArrayObject) operandStack.popObject();
         operandStack.pushInt(arrayObject.getLength());
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
-                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
+                topStackFrame.getMethod().getName() + "\t" + operandStack.toString() + "\n";
     }
 
 }
