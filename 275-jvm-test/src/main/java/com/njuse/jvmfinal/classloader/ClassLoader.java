@@ -4,6 +4,7 @@ import com.njuse.jvmfinal.classloader.classfileparser.ClassFile;
 import com.njuse.jvmfinal.classloader.classfilereader.ClassFileReader;
 import com.njuse.jvmfinal.classloader.classfilereader.classpath.EntryType;
 import com.njuse.jvmfinal.datastruct.NullObject;
+import com.njuse.jvmfinal.memory.jclass.AccessFlags;
 import com.njuse.jvmfinal.memory.jclass.Field;
 import com.njuse.jvmfinal.memory.jclass.InitState;
 import com.njuse.jvmfinal.memory.jclass.JClass;
@@ -81,7 +82,15 @@ public class ClassLoader {
      * @return 加载好的JClass对象
      */
     private JClass loadArrayClass(String className,String classPath, EntryType initiatingEntry) {
-        return null;
+        JClass ret = new JClass();
+        ret.setAccessFlags((short) AccessFlags.ACC_PUBLIC);
+        ret.setName(className);
+        ret.setSuperClassName("java/lang/Object");
+        ret.setSuperClass(classLoader.loadClass(ret.getSuperClassName(), null, initiatingEntry));
+        ret.setLoadEntryType(initiatingEntry);
+        methodArea.addClass(ret.getName(), ret);
+        ret.setInitState(InitState.SUCCESS);
+        return ret;
     }
 
     /**

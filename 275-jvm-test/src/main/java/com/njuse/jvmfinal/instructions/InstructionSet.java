@@ -203,7 +203,7 @@ public class InstructionSet {
     public static final int ARRAYLENGTH = 190;
     public static final int ATHROW = 191;
     public static final int CHECKCAST = 192;
-    public static final int INSTANCEOF_ = 193;
+    public static final int INSTANCEOF = 193;
     public static final int MONITORENTER = 194;
     public static final int MONITOREXIT = 195;
     public static final int WIDE = 196;

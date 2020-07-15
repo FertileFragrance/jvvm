@@ -51,38 +51,6 @@ public class INVOKEINTERFACE extends Index16Instruction {
         }
         JObject objectRef = topStackFrame.getOperandStack().popObject();
         Method toInvoke = ((InterfaceMethodRef) interfaceMethodRef).resolveInterfaceMethodRef(objectRef.getClazz());
-        if (toInvoke == null) {
-            String message = "要调用的接口方法名是" + method.getName() + "\n";
-            message += "引用objectRef的类是" + method.getClazz().getName() + "\n";
-            message += "objectRef真正的类是" + objectRef.getClazz().getName() + "\n";
-            message += "Child类实现的接口数量是" + objectRef.getClazz().getInterfaces().length + "\n";
-            message += "它们是";
-            for (int i = 0; i < objectRef.getClazz().getInterfaces().length; i++) {
-                message += objectRef.getClazz().getInterfaces()[i].getName() + "\t";
-            }
-            message += "\n";
-            message += "Human接口继承的接口数量是" + objectRef.getClazz().getInterfaces()[0].getInterfaces().length + "\n";
-            message += "它们是";
-            for (int i = 0; i < objectRef.getClazz().getInterfaces()[0].getInterfaces().length; i++) {
-                message += objectRef.getClazz().getInterfaces()[0].getInterfaces()[i].getName() + "\t";
-            }
-            message += "\n";
-            message += "Child类的父类是" + objectRef.getClazz().getSuperClass().getName() + "\n";
-            message += "Child类的父类实现的接口数量是" + objectRef.getClazz().getSuperClass().getInterfaces().length + "\n";
-            message += "它们是";
-            for (int i = 0; i < objectRef.getClazz().getSuperClass().getInterfaces().length; i++) {
-                message += objectRef.getClazz().getSuperClass().getInterfaces()[i].getName() + "\t";
-            }
-            message += "\n";
-            message += "Parent类的父类是" + objectRef.getClazz().getSuperClass().getSuperClass().getName() + "\n";
-            message += "Parent类的父类实现的接口数量是" + objectRef.getClazz().getSuperClass().getSuperClass().getInterfaces().length + "\n";
-            message += "它们是";
-            for (int i = 0; i < objectRef.getClazz().getSuperClass().getSuperClass().getInterfaces().length; i++) {
-                message += objectRef.getClazz().getSuperClass().getSuperClass().getInterfaces()[i].getName() + "\t";
-            }
-            message += "\n";
-            throw new NullPointerException(message);
-        }
         StackFrame newFrame = prepareNewFrame(topStackFrame, argc, argv, objectRef, toInvoke);
         topStackFrame.getThreadStack().pushStackFrame(newFrame);
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +

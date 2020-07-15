@@ -1,4 +1,4 @@
-package com.njuse.jvmfinal.instructions.object;
+package com.njuse.jvmfinal.instructions.object.create;
 
 import com.njuse.jvmfinal.datastruct.NonArrayObject;
 import com.njuse.jvmfinal.execution.Interpreter;

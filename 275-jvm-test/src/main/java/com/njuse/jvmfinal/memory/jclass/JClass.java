@@ -1,11 +1,14 @@
 package com.njuse.jvmfinal.memory.jclass;
 
+import com.njuse.jvmfinal.classloader.ClassLoader;
 import com.njuse.jvmfinal.classloader.classfileparser.ClassFile;
 import com.njuse.jvmfinal.classloader.classfileparser.FieldInfo;
 import com.njuse.jvmfinal.classloader.classfileparser.MethodInfo;
 import com.njuse.jvmfinal.classloader.classfileparser.constantpool.ConstantPool;
 import com.njuse.jvmfinal.classloader.classfilereader.classpath.EntryType;
+import com.njuse.jvmfinal.datastruct.array.*;
 import com.njuse.jvmfinal.datastruct.NonArrayObject;
+import com.njuse.jvmfinal.datastruct.array.ArrayType;
 import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.RuntimeConstantPool;
 import com.njuse.jvmfinal.memory.methodArea.StaticVars;
 import com.njuse.jvmfinal.memory.threadStack.StackFrame;
@@ -51,6 +54,11 @@ public class JClass {                                   // 一个JClass对象就
         this.methods = parseMethods(classFile.getMethods());
         this.runtimeConstantPool = parseRuntimeConstantPool(classFile.getConstantPool());
     }
+
+    /**
+     * 无参构造方法用于数组类的加载
+     */
+    public JClass() {}
 
     /*
         字段解析，将FieldInfo转换为Field
@@ -182,6 +190,140 @@ public class JClass {                                   // 一个JClass对象就
      */
     public NonArrayObject newObject() {
         return new NonArrayObject(this);
+    }
+
+    /**
+     * 创建一个数组对象
+     * @param length 数组长度
+     * @return 创建好的对象
+     */
+    public ArrayObject newArrayObject(int length) {
+        switch (this.getName().charAt(1)) {
+            case 'Z':
+                return new BooleanArrayObject(length, ArrayType.T_BOOLEAN);
+            case 'C':
+                return new CharArrayObject(length, ArrayType.T_CHAR);
+            case 'F':
+                return new FloatArrayObject(length, ArrayType.T_FLOAT);
+            case 'D':
+                return new DoubleArrayObject(length, ArrayType.T_DOUBLE);
+            case 'B':
+                return new ByteArrayObject(length, ArrayType.T_BYTE);
+            case 'S':
+                return new ShortArrayObject(length, ArrayType.T_SHORT);
+            case 'I':
+                return new IntArrayObject(length, ArrayType.T_INT);
+            case 'J':
+                return new LongArrayObject(length, ArrayType.T_LONG);
+            default:
+                return new RefArrayObject(length, ArrayType.T_REF);
+        }
+    }
+
+    /**
+     * 由组件类的得到要创建的数组类
+     * @return 加载完成的数组类
+     */
+    public JClass getArrayClass() {
+        String arrayClassName;
+        if (this.getName().charAt(0) == '[') {
+            arrayClassName = this.name;
+        } else if (this.getPrimitiveTypeComponentClassName() != null) {
+            arrayClassName = this.getPrimitiveTypeComponentClassName();
+        } else {
+            arrayClassName = "L" + this.getName() + ";";
+        }
+        arrayClassName = "[" + arrayClassName;
+        return ClassLoader.getInstance().loadClass(arrayClassName, null, this.getLoadEntryType());
+    }
+
+    /**
+     * 判断组件类是否是基本数据类型，若是则直接返回类名
+     * @return 类名或空
+     */
+    private String getPrimitiveTypeComponentClassName() {
+        if (this.getName().equals("Z") || this.getName().equals("C") || this.getName().equals("F") ||
+                this.getName().equals("D") || this.getName().equals("B") || this.getName().equals("S") ||
+                this.getName().equals("I") || this.getName().equals("J")) {
+            return this.name;
+        }
+        return null;
+    }
+
+    /**
+     * 通过类加载获得组件类，以此递归创建多维数组
+     * @return 加载完成的组件类
+     */
+    public JClass getComponentClass() {
+        String componentClassName = this.name.substring(1);
+        if (componentClassName.charAt(0) == '[') {
+            return ClassLoader.getInstance().loadClass(componentClassName, null, this.getLoadEntryType());
+        } else if (componentClassName.charAt(0) == 'L') {
+            componentClassName = componentClassName.substring(0, componentClassName.length() - 1);
+            return ClassLoader.getInstance().loadClass(componentClassName, null, this.getLoadEntryType());
+        } else {
+            return ClassLoader.getInstance().loadClass(this.getName(), null, this.getLoadEntryType());
+        }
+    }
+
+    /**
+     * 判断此类是不是数组类
+     * @return 是或否
+     */
+    public boolean isArray() {
+        return this.name.charAt(0) == '[';
+    }
+
+    /**
+     * 判断此类是不是另一个类的子类
+     * @param jClass 另一个类
+     * @return 是或否
+     */
+    public boolean isSubClassOf(JClass jClass) {
+        JClass clazz = this.getSuperClass();
+        while (clazz != null) {
+            if (clazz == jClass) {
+                return true;
+            }
+            clazz = clazz.getSuperClass();
+        }
+        return false;
+    }
+
+    /**
+     * 判断此类是不是实现了某个接口
+     * @param jClass 接口
+     * @return 是或否
+     */
+    public boolean isImplementOf(JClass jClass) {
+        JClass[] interfaces = this.getInterfaces();
+        if (interfaces != null && interfaces.length > 0) {
+            for (JClass clazz : interfaces) {
+                if (clazz == jClass) {
+                    return true;
+                }
+            }
+            for (int i = 0; i < interfaces.length; i++) {
+                if (interfaces[i].isImplementOf(jClass)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 得到数组类的原始类型
+     * @return 数组类的原始类型
+     */
+    public String getPrimitiveType() {
+        int index;
+        for (index = 0; index < this.getName().length(); index++) {
+            if (this.getName().charAt(index) != '[') {
+                break;
+            }
+        }
+        return this.getName().substring(index);
     }
 
 }

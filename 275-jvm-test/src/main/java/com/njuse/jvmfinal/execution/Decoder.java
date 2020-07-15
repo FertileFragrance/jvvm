@@ -11,11 +11,12 @@ import com.njuse.jvmfinal.instructions.convert.fromLong.*;
 import com.njuse.jvmfinal.instructions.invoke.*;
 import com.njuse.jvmfinal.instructions.load.constValue.*;
 import com.njuse.jvmfinal.instructions.load.fromLocalVariableTable.*;
-import com.njuse.jvmfinal.instructions.object.NEW;
-import com.njuse.jvmfinal.instructions.object.accessField.GETFIELD;
-import com.njuse.jvmfinal.instructions.object.accessField.GETSTATIC;
-import com.njuse.jvmfinal.instructions.object.accessField.PUTFIELD;
-import com.njuse.jvmfinal.instructions.object.accessField.PUTSTATIC;
+import com.njuse.jvmfinal.instructions.object.ARRAYLENGTH;
+import com.njuse.jvmfinal.instructions.object.INSTANCEOF;
+import com.njuse.jvmfinal.instructions.object.accessField.*;
+import com.njuse.jvmfinal.instructions.object.create.*;
+import com.njuse.jvmfinal.instructions.object.load.*;
+import com.njuse.jvmfinal.instructions.object.store.*;
 import com.njuse.jvmfinal.instructions.operate.IINC;
 import com.njuse.jvmfinal.instructions.operate.add.*;
 import com.njuse.jvmfinal.instructions.operate.bitwise.*;
@@ -102,7 +103,14 @@ public class Decoder {
         opMap.put(InstructionSet.ALOAD_1, new ALOAD_N(1));
         opMap.put(InstructionSet.ALOAD_2, new ALOAD_N(2));
         opMap.put(InstructionSet.ALOAD_3, new ALOAD_N(3));
-
+        opMap.put(InstructionSet.IALOAD, new IALOAD());
+        opMap.put(InstructionSet.LALOAD, new LALOAD());
+        opMap.put(InstructionSet.FALOAD, new FALOAD());
+        opMap.put(InstructionSet.DALOAD, new DALOAD());
+        opMap.put(InstructionSet.AALOAD, new AALOAD());
+        opMap.put(InstructionSet.BALOAD, new BALOAD());
+        opMap.put(InstructionSet.CALOAD, new CALOAD());
+        opMap.put(InstructionSet.SALOAD, new SALOAD());
         opMap.put(InstructionSet.ISTORE, new ISTORE());
         opMap.put(InstructionSet.LSTORE, new LSTORE());
         opMap.put(InstructionSet.FSTORE, new FSTORE());
@@ -128,7 +136,14 @@ public class Decoder {
         opMap.put(InstructionSet.ASTORE_1, new ASTORE_N(1));
         opMap.put(InstructionSet.ASTORE_2, new ASTORE_N(2));
         opMap.put(InstructionSet.ASTORE_3, new ASTORE_N(3));
-
+        opMap.put(InstructionSet.IASTORE, new IASTORE());
+        opMap.put(InstructionSet.LASTORE, new LASTORE());
+        opMap.put(InstructionSet.FASTORE, new FASTORE());
+        opMap.put(InstructionSet.DASTORE, new DASTORE());
+        opMap.put(InstructionSet.AASTORE, new AASTORE());
+        opMap.put(InstructionSet.BASTORE, new BASTORE());
+        opMap.put(InstructionSet.CASTORE, new CASTORE());
+        opMap.put(InstructionSet.SASTORE, new SASTORE());
         opMap.put(InstructionSet.POP, new POP());
         opMap.put(InstructionSet.POP2, new POP2());
         opMap.put(InstructionSet.DUP, new DUP());
@@ -230,7 +245,13 @@ public class Decoder {
         opMap.put(InstructionSet.INVOKEINTERFACE, new INVOKEINTERFACE());
         //opMap.put(InstructionSet.INVOKEDYNAMIC, new INVOKEDYNAMIC());
         opMap.put(InstructionSet.NEW, new NEW());
+        opMap.put(InstructionSet.NEWARRAY, new NEWARRAY());
+        opMap.put(InstructionSet.ANEWARRAY, new ANEWARRAY());
+        opMap.put(InstructionSet.ARRAYLENGTH, new ARRAYLENGTH());
 
+        opMap.put(InstructionSet.INSTANCEOF, new INSTANCEOF());
+
+        opMap.put(InstructionSet.MULTIANEWARRAY, new MULTIANEWARRAY());
         opMap.put(InstructionSet.IFNULL, new IFNULL());
         opMap.put(InstructionSet.IFNONNULL, new IFNONNULL());
         opMap.put(InstructionSet.GOTO_W, new GOTO_W());
