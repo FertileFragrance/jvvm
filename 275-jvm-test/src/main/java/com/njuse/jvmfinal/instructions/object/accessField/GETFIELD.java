@@ -58,6 +58,9 @@ public class GETFIELD extends Index16Instruction {
             case 'L':
                 operandStack.pushObject(instanceVars.getObject(slotID));
                 break;
+            case '[':
+                operandStack.pushObject(instanceVars.getObject(slotID));
+                break;
             default:
                 break;
         }
