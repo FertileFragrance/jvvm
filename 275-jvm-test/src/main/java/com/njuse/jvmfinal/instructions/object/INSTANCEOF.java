@@ -1,7 +1,9 @@
 package com.njuse.jvmfinal.instructions.object;
 
 import com.njuse.jvmfinal.datastruct.JObject;
+import com.njuse.jvmfinal.datastruct.NonArrayObject;
 import com.njuse.jvmfinal.datastruct.NullObject;
+import com.njuse.jvmfinal.datastruct.array.ArrayObject;
 import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.Index16Instruction;
 import com.njuse.jvmfinal.memory.jclass.JClass;
@@ -39,8 +41,11 @@ public class INSTANCEOF extends Index16Instruction {
                 operandStack.pushInt(0);
             }
         } catch (NullPointerException e) {
-            String message = "判断的类是" + jClass.getName();
-            message += "引用所在的类是" + objectRef.getClazz().getName();
+            String message = "判断的类是" + jClass.getName() + "\n";
+            message += "引用是null吗？" + String.valueOf(objectRef == null) + "\n";
+            message += "引用是空对象类型吗？" + String.valueOf(objectRef instanceof NullObject) + "\n";
+            message += "引用是非数组对象类型吗？" + String.valueOf(objectRef instanceof NonArrayObject) + "\n";
+            message += "引用是数组对象类型吗？" + String.valueOf(objectRef instanceof ArrayObject) + "\n";
             throw new NullPointerException(message);
         }
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
