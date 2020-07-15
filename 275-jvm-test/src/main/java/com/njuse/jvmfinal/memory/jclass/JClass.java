@@ -200,23 +200,23 @@ public class JClass {                                   // 一个JClass对象就
     public ArrayObject newArrayObject(int length) {
         switch (this.getName().charAt(1)) {
             case 'Z':
-                return new BooleanArrayObject(length, ArrayType.T_BOOLEAN);
+                return new BooleanArrayObject(this, length, ArrayType.T_BOOLEAN);
             case 'C':
-                return new CharArrayObject(length, ArrayType.T_CHAR);
+                return new CharArrayObject(this, length, ArrayType.T_CHAR);
             case 'F':
-                return new FloatArrayObject(length, ArrayType.T_FLOAT);
+                return new FloatArrayObject(this, length, ArrayType.T_FLOAT);
             case 'D':
-                return new DoubleArrayObject(length, ArrayType.T_DOUBLE);
+                return new DoubleArrayObject(this, length, ArrayType.T_DOUBLE);
             case 'B':
-                return new ByteArrayObject(length, ArrayType.T_BYTE);
+                return new ByteArrayObject(this, length, ArrayType.T_BYTE);
             case 'S':
-                return new ShortArrayObject(length, ArrayType.T_SHORT);
+                return new ShortArrayObject(this, length, ArrayType.T_SHORT);
             case 'I':
-                return new IntArrayObject(length, ArrayType.T_INT);
+                return new IntArrayObject(this, length, ArrayType.T_INT);
             case 'J':
-                return new LongArrayObject(length, ArrayType.T_LONG);
+                return new LongArrayObject(this, length, ArrayType.T_LONG);
             default:
-                return new RefArrayObject(length, ArrayType.T_REF);
+                return new RefArrayObject(this, length, ArrayType.T_REF);
         }
     }
 
