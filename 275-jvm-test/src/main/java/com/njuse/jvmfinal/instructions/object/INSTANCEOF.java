@@ -32,14 +32,16 @@ public class INSTANCEOF extends Index16Instruction {
                 get(topStackFrame.getMethod().getClazz()).getConstant(index);
         assert classRef instanceof ClassRef;
         JClass jClass = ((ClassRef) classRef).resolveClassRef();
-        if (jClass == null) {
-            String message = "类引用是" + ((ClassRef) classRef).getClassName();
+        try {
+            if (objectRef.isInstanceOf(jClass)) {
+                operandStack.pushInt(1);
+            } else {
+                operandStack.pushInt(0);
+            }
+        } catch (NullPointerException e) {
+            String message = "判断的类是" + jClass.getName();
+            message += "引用所在的类是" + objectRef.getClazz().getName();
             throw new NullPointerException(message);
-        }
-        if (objectRef.isInstanceOf(jClass)) {
-            operandStack.pushInt(1);
-        } else {
-            operandStack.pushInt(0);
         }
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
                 topStackFrame.getMethod().getName() + "\t" + operandStack.toString() + "\n";
