@@ -20,7 +20,12 @@ public class ICONST_N extends NoOperandsInstruction {
     @Override
     public void execute(StackFrame topStackFrame) {
         OperandStack operandStack = topStackFrame.getOperandStack();
-        operandStack.pushInt(value);
+        //operandStack.pushInt(value);
+        try {
+            operandStack.pushInt(value);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new ArrayIndexOutOfBoundsException(Interpreter.message);
+        }
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
                 topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }

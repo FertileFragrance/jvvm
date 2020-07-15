@@ -31,7 +31,7 @@ public class INSTANCEOF extends Index16Instruction {
         Constant classRef = MethodArea.getInstance().getClassToRuntimeConstantPool().
                 get(topStackFrame.getMethod().getClazz()).getConstant(index);
         assert classRef instanceof ClassRef;
-        JClass jClass = ((ClassRef) classRef).getClassToResolve();
+        JClass jClass = ((ClassRef) classRef).resolveClassRef();
         if (objectRef.isInstanceOf(jClass)) {
             operandStack.pushInt(1);
         } else {
