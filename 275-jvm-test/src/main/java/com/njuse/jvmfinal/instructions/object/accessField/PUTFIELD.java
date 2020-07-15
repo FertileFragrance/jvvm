@@ -4,9 +4,7 @@ import com.njuse.jvmfinal.datastruct.JObject;
 import com.njuse.jvmfinal.datastruct.NonArrayObject;
 import com.njuse.jvmfinal.execution.Interpreter;
 import com.njuse.jvmfinal.instructions.abstractIns.Index16Instruction;
-import com.njuse.jvmfinal.memory.heap.InstanceVars;
 import com.njuse.jvmfinal.memory.jclass.Field;
-import com.njuse.jvmfinal.memory.jclass.InitState;
 import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.constant.Constant;
 import com.njuse.jvmfinal.memory.jclass.runtimeConstantPool.constant.ref.FieldRef;
 import com.njuse.jvmfinal.memory.methodArea.MethodArea;
@@ -76,6 +74,10 @@ public class PUTFIELD extends Index16Instruction {
                 nonArrayObject = (NonArrayObject) operandStack.popObject();
                 nonArrayObject.getInstanceVars().setObject(slotID, objectVal);
                 break;
+            case '[':
+                JObject arrayObjectVal = operandStack.popObject();
+                nonArrayObject = (NonArrayObject) operandStack.popObject();
+                nonArrayObject.getInstanceVars().setObject(slotID, arrayObjectVal);
             default:
                 break;
         }

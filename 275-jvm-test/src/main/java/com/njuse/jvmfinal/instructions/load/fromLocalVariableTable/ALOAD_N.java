@@ -19,12 +19,7 @@ public class ALOAD_N extends LOAD_N {
     public void execute(StackFrame topStackFrame) {
         OperandStack operandStack = topStackFrame.getOperandStack();
         LocalVariableTable localVariableTable = topStackFrame.getLocalVariableTable();
-        //operandStack.pushObject(localVariableTable.getObject(index));
-        try {
-            operandStack.pushObject(localVariableTable.getObject(index));
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new ArrayIndexOutOfBoundsException(Interpreter.message);
-        }
+        operandStack.pushObject(localVariableTable.getObject(index));
         Interpreter.message += this.toString() + "\t" + topStackFrame.getMethod().getClazz().getName() + "\t" +
                 topStackFrame.getMethod().getName() + "\t" + operandStack.toString() +"\n";
     }
