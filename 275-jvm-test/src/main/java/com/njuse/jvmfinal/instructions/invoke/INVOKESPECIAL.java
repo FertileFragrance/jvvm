@@ -41,7 +41,7 @@ public class INVOKESPECIAL extends Index16Instruction {
         JObject objectRef = topStackFrame.getOperandStack().popObject();
         JClass C;
         if (topStackFrame.getMethod().getClazz().isSuper() && !method.getName().equals("<init>") &&
-                method.getClazz().getSuperClass() == topStackFrame.getMethod().getClazz()) {
+                method.getClazz() == topStackFrame.getMethod().getClazz().getSuperClass()) {
             C = topStackFrame.getMethod().getClazz().getSuperClass();
         } else {
             C = method.getClazz();

@@ -44,6 +44,7 @@ public class LightEasyTest {
             fail("Your answer is not correct");
         }
 //        System.err.println(out);
+
     }
 
     @Test
@@ -57,7 +58,6 @@ public class LightEasyTest {
             fail("Your answer is not correct");
         }
 //        System.err.println(out);
-
     }
 
     @Test
